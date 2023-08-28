@@ -1,16 +1,38 @@
+
+
+
 //Lê as teclas
-var _keyRight = keyboard_check(ord("D"));
+//var _keyRight = keyboard_check(ord("D"));
 var _keyRight = keyboard_check(vk_right);
 
-var _keyLeft = keyboard_check(ord("A"));
+//var _keyLeft = keyboard_check(ord("A"));
 var _keyLeft = keyboard_check(vk_left);
 
 var _keyJump = keyboard_check_pressed(vk_space);
 
-
-hsp = (_keyRight - _keyLeft) * hsp_walk; // move horizontalmente
+hsp = (_keyRight - _keyLeft) * (hsp_walk); // move horizontalmente
 
 vsp = vsp + grv; //move verticalmente
+
+if(_keyRight > _keyLeft)
+{
+	image_xscale=1;
+}
+else if (_keyRight < _keyLeft)
+{
+	image_xscale=-1;
+}
+
+//if(keyboard_check(vk_left) || keyboard_check(vk_right))
+if(hsp > 0 || hsp < 0)
+{
+	sprite_index = sprtPlayerAndando;
+}
+else
+{
+	sprite_index = sprtPlayerParado;
+}
+
 
 //verifica se pode pular
 if(can_jump-- > 0 && _keyJump)
@@ -26,16 +48,21 @@ if(place_meeting(x + hsp, y, objChao))
 {
 	//while(abs(hsp) > 0.1)
 	{
-		hsp *= 0.5;
+		//hsp *= 0.5;
 		
 		if(!place_meeting(x + hsp, y, objChao))
+		{
 			x += hsp;
+		}
 	}
 	
-	hsp = 0;
+	//hsp = 0;
 }
 
+
 x += hsp;
+
+
 
 if(place_meeting(x, y + vsp, objChao))
 {

@@ -7,3 +7,6 @@ can_jump = 0; //caso esteja tocando o chão
 
 
 
+wCam = 500;
+hCam = 500;
+
